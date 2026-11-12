@@ -1,0 +1,22 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+
+actor "Responsable / Admin" as R
+actor "Enseignant" as E
+actor "Étudiant" as Et
+
+rectangle "Plateforme de Gestion des TD" {
+    R --> (Gérer les Matières)
+    R --> (Gérer les Groupes de TD)
+    R --> (Affecter les Étudiants aux Groupes)
+    R --> (Programmer une Séance de TD)
+    R --> (Générer l'Emploi du Temps sans Conflit)
+    
+    E --> (Consulter son Emploi du Temps)
+    E --> (Enregistrer les Présences)
+    
+    Et --> (Consulter le Calendrier des TD)
+    Et --> (Consulter son Bilan de Présence)
+}
+@enduml

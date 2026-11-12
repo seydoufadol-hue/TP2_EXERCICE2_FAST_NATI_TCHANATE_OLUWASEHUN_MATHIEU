@@ -1,0 +1,25 @@
+@startuml
+autonumber
+actor Responsable as R
+participant "Système" as Sys
+participant "Salle" as S
+participant "Enseignant" as E
+participant "SeanceTD" as Seance
+
+R -> Sys: programmerSeance(matiere, groupe, salle, enseignant, horaire)
+activate Sys
+Sys -> S: verifierDisponibilite(horaire)
+activate S
+S --> Sys: disponible / libre
+deactivate S
+
+Sys -> E: verifierDisponibilite(horaire)
+activate E
+E --> Sys: disponible / libre
+deactivate E
+
+create Seance
+Sys -> Seance: new SeanceTD(...)
+Sys --> R: Confirmation de programmation de la séance
+deactivate Sys
+@enduml

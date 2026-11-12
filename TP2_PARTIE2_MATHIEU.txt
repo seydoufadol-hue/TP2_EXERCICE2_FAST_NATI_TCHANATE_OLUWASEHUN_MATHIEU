@@ -1,0 +1,62 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+class Etudiant {
+    - numEtudiant: string
+    - nom: string
+    - prenom: string
+    + getNumEtudiant(): string
+    + getNomComplet(): string
+}
+
+class Matiere {
+    - code: string
+    - nom: string
+    + getCode(): string
+    + getNom(): string
+}
+
+class GroupeTD {
+    - codeGroupe: string
+    - niveau: string
+    + ajouterEtudiant(e: Etudiant*): void
+    + getCodeGroupe(): string
+}
+
+class Enseignant {
+    - idEnseignant: string
+    - nom: string
+    - prenom: string
+    + getNomComplet(): string
+}
+
+class Salle {
+    - numeroSalle: string
+    - capacite: int
+    + getNumero(): string
+    + estDisponible(): bool
+}
+
+class SeanceTD {
+    - idSeance: string
+    - dateHeureDebut: string
+    - dateHeureFin: string
+    + programmer(): void
+}
+
+class Presence {
+    - present: bool
+    + marquerPresence(statut: bool): void
+    + estPresent(): bool
+}
+
+' Relations et multiplicités
+GroupeTD "1" o-- "*" Etudiant : compose >
+SeanceTD "*" --> "1" Matiere : concerne >
+SeanceTD "*" --> "1" GroupeTD : destiné à >
+SeanceTD "*" --> "1" Enseignant : animé par >
+SeanceTD "*" --> "1" Salle : se déroule dans >
+Presence "*" --> "1" Etudiant : concerne >
+Presence "*" --> "1" SeanceTD : lié à >
+
+@enduml

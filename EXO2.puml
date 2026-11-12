@@ -1,0 +1,68 @@
+@startuml
+skinparam classAttributeIconSize 0
+skinparam backgroundColor #FEFEFE
+
+class Filiere {
+    - nom: string
+    - niveau: string
+    + Filiere(nom: string, niveau: string)
+    + getNom(): string
+    + getNiveau(): string
+    + getUes(): vector<UE>
+    + ajouterUE(ue: UE): void
+    + afficher(): void
+}
+
+class UE {
+    - code: string
+    - nom: string
+    - credits: int
+    + UE(code: string, nom: string, credits: int)
+    + getCode(): string
+    + getNom(): string
+    + getCredits(): int
+    + getMatieres(): vector<Matiere>
+    + ajouterMatiere(m: Matiere): void
+    + afficher(): void
+}
+
+class Matiere {
+    - code: string
+    - nom: string
+    - coefficient: float
+    + Matiere(code: string, nom: string, coefficient: float)
+    + getCode(): string
+    + getNom(): string
+    + getCoefficient(): float
+    + afficher(): void
+}
+
+class Note {
+    - valeur: float
+    + Note(matiere: Matiere*, valeur: float)
+    + getMatiere(): Matiere*
+    + getValeur(): float
+    + setValeur(val: float): void
+}
+
+class Etudiant {
+    - numEtudiant: string
+    - nom: string
+    - prenom: string
+    + Etudiant(num: string, nom: string, prenom: string, filiere: Filiere*)
+    + getNumEtudiant(): string
+    + getNomComplet(): string
+    + ajouterNote(mat: Matiere*, valeur: float): void
+    + calculerMoyenneGenerale(): float
+    + validerUE(ue: UE): bool
+    + afficherReleve(): void
+}
+
+' Relations et Multiplicités
+Filiere "1" *-- "*" UE : compose >
+UE "1" *-- "*" Matiere : compose >
+Etudiant "*" --> "1" Filiere : inscrit dans >
+Etudiant "1" *-- "*" Note : possède >
+Note "*" --> "1" Matiere : évalue >
+
+@enduml

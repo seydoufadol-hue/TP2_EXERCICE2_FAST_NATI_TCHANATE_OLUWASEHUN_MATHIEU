@@ -1,0 +1,17 @@
+@startuml
+start
+:Arrivée de l'enseignant et des étudiants en salle;
+:Ouverture de la séance de TD sur la plateforme;
+repeat :Pour chaque étudiant du groupe;
+  if (Étudiant présent dans la salle ?) then (Oui)
+    :Enregistrer présence = VRAI;
+  else (Non)
+    :Enregistrer présence = FAUX;
+  endif
+repeat while (Tous les étudiants du groupe traités ?) is (Non)
+-> Oui;
+:Validation du registre des présences;
+:Dispense du cours de Travaux Dirigés;
+:Clôture de la séance;
+stop
+@enduml
